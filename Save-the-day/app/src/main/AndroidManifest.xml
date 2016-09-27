@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Edit"
+        <activity android:name=".EditActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>

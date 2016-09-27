@@ -93,14 +93,14 @@ public class ABAdapter extends BaseAdapter {
             //这里的tag设置是用的资源ID作为Key
             switch (type) {
                 case TYPE_A:
-                    convertView = View.inflate(context, R.layout.preview, null);
+                    convertView = View.inflate(context, R.layout.view1_listitem_journal, null);
                     holder1.way = (TextView) convertView.findViewById(R.id.wayt);
                     holder1.day = (TextView) convertView.findViewById(R.id.dayt);
                     holder1.journal = (TextView) convertView.findViewById(R.id.jourt);
                     convertView.setTag(R.id.tag_first, holder1);
                     break;
                 case TYPE_B:
-                    convertView = View.inflate(context, R.layout.point, null);
+                    convertView = View.inflate(context, R.layout.view1_listitem_point, null);
                     holder2.img = (ImageView) convertView.findViewById(R.id.img);
                     convertView.setTag(R.id.tag_second, holder2);
                     break;

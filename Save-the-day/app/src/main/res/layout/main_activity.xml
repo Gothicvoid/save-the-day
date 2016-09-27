@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40px"
+        android:layout_alignParentTop="true" />
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:scrollbars="none"
+        android:layout_above="@+id/rl"
+        android:layout_below="@+id/today">
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonmonth"
+            android:src="@drawable/bigline"/>
+        <Button
+            android:id="@+id/buttonmonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/sl1"
+            android:background="@android:color/transparent"
+            />
+        <ImageView
+            android:id="@+id/sl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonyear"
+            android:src="@drawable/smallline"/>
+        <Button
+            android:id="@+id/buttonyear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/sl2"
+            android:background="@android:color/transparent"
+            />
+        <ImageView
+            android:id="@+id/sl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/smallline"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonadd"/>
+        <Button
+            android:id="@+id/buttonadd"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/sl3"
+            android:background="@android:color/transparent"
+            android:text="@string/add"
+            />
+        <ImageView
+            android:id="@+id/sl3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buttonview"
+            android:src="@drawable/smallline"/>
+        <ImageButton
+            android:id="@+id/buttonview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/view"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mrl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"
+        android:background="@android:color/transparent">
+
+        <HorizontalScrollView
+            android:id="@+id/hsvm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/jan"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/jan"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/feb"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/feb"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/mar"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/mar"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/apr"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/apr"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/may"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/may"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/jun"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/jun"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/jul"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/jul"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/aug"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/aug"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/sep"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/sep"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/oct"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/oct"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/nov"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/nov"
+                    android:textColor="#ffffff"/>
+
+                <Button
+                    android:id="@+id/dec"
+                    android:layout_width="54dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/gray"
+                    android:text="@string/dec"
+                    android:textColor="#ffffff"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/yrl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"
+        android:background="@android:color/transparent">
+
+        <HorizontalScrollView
+            android:id="@+id/hsvy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

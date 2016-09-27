@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     private String smonth = month;
     private String sday = day;
     private String yn;
+    private boolean isadd = false;
 
     private int n;
     private int mv2pos;
@@ -55,12 +56,13 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     private RelativeLayout monthv;
     private RelativeLayout yearv;
     private Button buttonyear;
+    private Button buttonmonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.mainview);
+        setContentView(R.layout.main_activity);
 
         final TextView textView = (TextView)this.findViewById(R.id.today);
         final String xx = "Today is " + way + " " + month + "/" + day + "/" + year;
@@ -72,20 +74,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         };
 
         new Thread(this).start();
-
-        if(syear.equals(year) && smonth.equals(month)){
-            n = Integer.parseInt(sday);
-        } else{
-            if(smonth.equals("02")){
-                int y = Integer.parseInt(syear);
-                if((y%4) == 0){
-                    n = 29;
-                } else n = 28;
-            } else if(smonth.equals("04") || smonth.equals("06") ||
-                    smonth.equals("09") || smonth.equals("11")){
-                n = 30;
-            } else n = 31;
-        }
 
         if(viewtype == 1) lv1();
         else lv2();
@@ -114,9 +102,10 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         buttonadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isadd = true;
                 String name = year + month + day + ".txt";
                 Journal journal = (Journal)getObject(name);
-                Intent intent = new Intent(MainActivity.this,Edit.class);
+                Intent intent = new Intent(MainActivity.this,EditActivity.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("key",journal);
                 intent.putExtras(mBundle);
@@ -127,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             }
         });
 
-        final Button buttonmonth = (Button)this.findViewById(R.id.buttonmonth);
+        buttonmonth = (Button)this.findViewById(R.id.buttonmonth);
         buttonmonth.setText(getmonth(smonth));
 
         buttonyear = (Button)this.findViewById(R.id.buttonyear);
@@ -373,28 +362,53 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(data != null && requestCode == 100){
-            String d = data.getStringExtra("d");
-            String n = syear + smonth + d + ".txt";
-            if(viewtype == 1){
-                if((Journal)getObject(n) != null){
-                    int i = Integer.parseInt(d) - 1;
-                    o.set(i,(Journal)getObject(n));
-                    abAdapter = new ABAdapter(this,o);
-                    lv.setAdapter(abAdapter);
+            if(isadd){
+                isadd = false;
+                syear = year;
+                smonth = month;
+                buttonyear.setText(syear);
+                buttonmonth.setText(getmonth(smonth));
+                if(viewtype == 1) lv1();
+                else lv2();
+            } else {
+                String d = data.getStringExtra("d");
+                String n = syear + smonth + d + ".txt";
+                if (viewtype == 1) {
+                    if ((Journal) getObject(n) != null) {
+                        int i = Integer.parseInt(d) - 1;
+                        o.set(i, (Journal) getObject(n));
+                        abAdapter = new ABAdapter(this, o);
+                        lv.setAdapter(abAdapter);
+                    }
+                } else {
+                    vjournal = (Journal) getObject(n);
+                    listItem.get(mv2pos).put("ItemText", " " + "/" + vjournal.getText());
+                    stdSA = new stdSimpleAdapter(this, listItem, R.layout.view2_listitem,
+                            new String[]{"Itemday", "Itemway", "ItemText"},
+                            new int[]{R.id.mv2d, R.id.mv2w, R.id.mv2j});
+                    lv.setAdapter(stdSA);
                 }
-            } else{
-                vjournal = (Journal)getObject(n);
-                listItem.get(mv2pos).put("ItemText", " " + "/" + vjournal.getText());
-                stdSA = new stdSimpleAdapter(this,listItem, R.layout.mainview2item,
-                        new String[] {"Itemday", "Itemway", "ItemText"},
-                        new int[] {R.id.mv2d,R.id.mv2w,R.id.mv2j});
-                lv.setAdapter(stdSA);
             }
         }
     }
 
     //主视图1列表生成
     private void lv1(){
+
+        if(syear.equals(year) && smonth.equals(month)){
+            n = Integer.parseInt(day);
+        } else{
+            if(smonth.equals("02")){
+                int y = Integer.parseInt(syear);
+                if((y%4) == 0){
+                    n = 29;
+                } else n = 28;
+            } else if(smonth.equals("04") || smonth.equals("06") ||
+                    smonth.equals("09") || smonth.equals("11")){
+                n = 30;
+            } else n = 31;
+        }
+
         lv = (ListView) findViewById(R.id.lv);
         o = new ArrayList<>();
 
@@ -422,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 if(position <= 8) sday = "0" + sday;
                 String name = syear + smonth + sday + ".txt";
                 Journal journal = (Journal)getObject(name);
-                Intent intent = new Intent(MainActivity.this,Edit.class);
+                Intent intent = new Intent(MainActivity.this,EditActivity.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("key",journal);
                 intent.putExtras(mBundle);
@@ -436,6 +450,21 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     //主视图2列表生成
     private void lv2(){
+
+        if(syear.equals(year) && smonth.equals(month)){
+            n = Integer.parseInt(day);
+        } else{
+            if(smonth.equals("02")){
+                int y = Integer.parseInt(syear);
+                if((y%4) == 0){
+                    n = 29;
+                } else n = 28;
+            } else if(smonth.equals("04") || smonth.equals("06") ||
+                    smonth.equals("09") || smonth.equals("11")){
+                n = 30;
+            } else n = 31;
+        }
+
         lv = (ListView) findViewById(R.id.lv);
 
         listItem = new ArrayList<HashMap<String, Object>>();
@@ -456,7 +485,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             }
         }
 
-        stdSA = new stdSimpleAdapter(this,listItem, R.layout.mainview2item,
+        stdSA = new stdSimpleAdapter(this,listItem, R.layout.view2_listitem,
                 new String[] {"Itemday", "Itemway", "ItemText"},
                 new int[] {R.id.mv2d,R.id.mv2w,R.id.mv2j});
 
@@ -470,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 sday = tv.getText().toString().substring(0, 2);
                 String name = syear + smonth + sday + ".txt";
                 Journal journal = (Journal)getObject(name);
-                Intent intent = new Intent(MainActivity.this,Edit.class);
+                Intent intent = new Intent(MainActivity.this,EditActivity.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putSerializable("key",journal);
                 intent.putExtras(mBundle);
